@@ -26,10 +26,12 @@ import {
 } from "@/components/ui/select"
 import { Card, CardFooter } from "@/components/ui/card"
 import Image from "next/image"
+import { useProModel } from "@/hooks/use-pre-model"
 
 const ImagePage = () => {
+  const proModel = useProModel()
   const router = useRouter()
-  const [images, setImages] = useState<string[]>([])
+  const [images, setImages] = useState<string>("")
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -43,16 +45,19 @@ const ImagePage = () => {
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     try {
-      setImages([])
+      setImages("")
       const response = await axios.post("/api/image", values)
 
-      const urls = response.data.map((image: { url: string }) => image.url)
+      const urls = response.data[0]
+      console.log(urls)
 
       setImages(urls)
 
       form.reset()
     } catch (error: any) {
-      console.log(error)
+      if (error?.response?.status === 403) {
+        proModel.onOpen()
+      }
     } finally {
       router.refresh()
     }
@@ -81,7 +86,7 @@ const ImagePage = () => {
                       <Input
                         className="border-0 outline-none focus-visible:ring-0 focus-visible:ring-transparent "
                         disabled={isLoading}
-                        placeholder="A picture of a horse in swiss alps"
+                        placeholder="A picture of a horse in wiss alps"
                         {...field}
                       />
                     </FormControl>
@@ -157,27 +162,23 @@ const ImagePage = () => {
               <Loder />
             </div>
           )}
-          {images.length === 0 && !isLoading && (
-            <Empty label="No Images generated." />
-          )}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 mt-8 ">
-            {images.map((src) => (
-              <Card key={src} className="rounded-lg overflow-hidden">
-                <div className="relative aspect-square">
-                  <Image src={src} alt="Image" fill />
+          {images == "" && !isLoading && <Empty label="No Images generated." />}
+          {images == "" ? (
+            <div></div>
+          ) : (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 mt-8 ">
+              <Card className="rounded-lg overflow-hidden">
+                <div className="relative aspect-square  mb-3">
+                  <Image src={images} alt="Image" fill />
                 </div>
                 <CardFooter>
-                  <Button
-                    onClick={() => window.open(src)}
-                    variant="secondary"
-                    className="w-full"
-                  >
-                    <Download className="h-4 w-4 mr-2">Download</Download>
+                  <Button variant="secondary" className="w-full">
+                    <Download className="h-4 w-4 mr-2" />
                   </Button>
                 </CardFooter>
               </Card>
-            ))}
-          </div>
+            </div>
+          )}
         </div>
       </div>
     </div>

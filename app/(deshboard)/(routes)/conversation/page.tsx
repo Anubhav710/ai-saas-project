@@ -17,9 +17,11 @@ import Loder from "@/components/Loder"
 import { cn } from "@/lib/utils"
 import UserAvatar from "@/components/user-avatar"
 import BotAvatar from "@/components/bot-avatar"
+import { useProModel } from "@/hooks/use-pre-model"
 
 const ConversationPage = () => {
   const router = useRouter()
+  const proModel = useProModel()
 
   const [messages, setMessages] = useState<ChatCompletionRequestMessage[]>([])
 
@@ -47,7 +49,9 @@ const ConversationPage = () => {
 
       form.reset()
     } catch (error: any) {
-      console.log(error)
+      if (error?.response?.status === 403) {
+        proModel.onOpen()
+      }
     } finally {
       router.refresh()
     }

@@ -1,6 +1,5 @@
 import { auth } from "@clerk/nextjs"
 import { NextResponse } from "next/server"
-import { Configuration, OpenAIApi } from "openai"
 import Replicate from "replicate"
 import { increaseApiLimit, checkApiLimit } from "@/lib/api-limit"
 
@@ -12,7 +11,7 @@ export async function POST(req: Request) {
   try {
     const { userId } = auth()
     const body = await req.json()
-    const { prompt, amount = 1, resolution = "512x512" } = body
+    const { prompt } = body
 
     if (!userId) {
       return new NextResponse("Unauthorized", { status: 401 })
@@ -21,12 +20,6 @@ export async function POST(req: Request) {
     if (!prompt) {
       return new NextResponse("Prompt is required", { status: 400 })
     }
-    if (!amount) {
-      return new NextResponse("Amount is required", { status: 400 })
-    }
-    if (!resolution) {
-      return new NextResponse("Resolution is required", { status: 400 })
-    }
     const freeTrial = await checkApiLimit()
 
     if (!freeTrial) {
@@ -34,7 +27,7 @@ export async function POST(req: Request) {
     }
 
     const response = await replicate.run(
-      "ai-forever/kandinsky-2.2:ea1addaab376f4dc227f5368bbd8eff901820fd1cc14ed8cad63b29249e9d463",
+      "anotherjesse/zeroscope-v2-xl:9f747673945c62801b13b84701c783929c0ee784e4748ec062204894dda1a351",
       {
         input: {
           prompt: prompt,
@@ -44,7 +37,7 @@ export async function POST(req: Request) {
     await increaseApiLimit()
     return NextResponse.json(response)
   } catch (error) {
-    console.log("[Image_ERROR]", error)
+    console.log("[VIDEO_ERROR]", error)
     return new NextResponse("Internal error", { status: 500 })
   }
 }
