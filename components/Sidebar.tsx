@@ -56,17 +56,21 @@ const routes = [
     color: "text-green-700",
   },
   {
-    label: "Setting",
+    label: "Settings",
     icon: Settings,
-    href: "/setting",
+    href: "/settings",
   },
 ]
 
 interface SidebarProps {
   apiLimitCount: number
+  isPro: boolean
 }
 
-export default function Sidebar({ apiLimitCount = 0 }: SidebarProps) {
+export default function Sidebar({
+  apiLimitCount = 0,
+  isPro = false,
+}: SidebarProps) {
   const parthName = usePathname()
   return (
     <div className="space-y-4 flex flex-col h-screen bg-[#111827] text-white   ">
@@ -99,7 +103,7 @@ export default function Sidebar({ apiLimitCount = 0 }: SidebarProps) {
           ))}
         </div>
       </div>
-      <FreeCounter apiLimitCount={apiLimitCount} />
+      <FreeCounter isPro={isPro} apiLimitCount={apiLimitCount} />
     </div>
   )
 }

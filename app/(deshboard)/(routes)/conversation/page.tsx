@@ -18,6 +18,7 @@ import { cn } from "@/lib/utils"
 import UserAvatar from "@/components/user-avatar"
 import BotAvatar from "@/components/bot-avatar"
 import { useProModel } from "@/hooks/use-pre-model"
+import toast from "react-hot-toast"
 
 const ConversationPage = () => {
   const router = useRouter()
@@ -51,6 +52,8 @@ const ConversationPage = () => {
     } catch (error: any) {
       if (error?.response?.status === 403) {
         proModel.onOpen()
+      } else {
+        toast.error("Something went wrong")
       }
     } finally {
       router.refresh()

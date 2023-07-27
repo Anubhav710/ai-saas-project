@@ -9,9 +9,13 @@ import { useProModel } from "@/hooks/use-pre-model"
 
 interface FreecounterProps {
   apiLimitCount: number
+  isPro: boolean
 }
 
-const FreeCounter = ({ apiLimitCount = 0 }: FreecounterProps) => {
+const FreeCounter = ({
+  apiLimitCount = 0,
+  isPro = false,
+}: FreecounterProps) => {
   const proModel = useProModel()
   const [mounted, setMounted] = useState(false)
   useEffect(() => {
@@ -19,6 +23,10 @@ const FreeCounter = ({ apiLimitCount = 0 }: FreecounterProps) => {
   }, [])
 
   if (!mounted) {
+    return null
+  }
+
+  if (isPro) {
     return null
   }
 

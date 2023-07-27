@@ -1,5 +1,5 @@
 "use client"
-import React from "react"
+import React, { useState } from "react"
 import {
   Dialog,
   DialogContent,
@@ -23,6 +23,8 @@ import {
 import { Card } from "./ui/card"
 import { cn } from "@/lib/utils"
 import { Button } from "./ui/button"
+import axios from "axios"
+import toast from "react-hot-toast"
 
 const tools = [
   {
@@ -59,6 +61,20 @@ const tools = [
 
 const ProModel = () => {
   const proModel = useProModel()
+  const [loading, setLoading] = useState(false)
+
+  const onSubscribe = async () => {
+    try {
+      setLoading(true)
+      const response = await axios.get("/api/stripe")
+
+      window.location.href = await response.data.url
+    } catch (error) {
+      toast.error("Something went wrong")
+    } finally {
+      setLoading(false)
+    }
+  }
   return (
     <div className="pl-72">
       <Dialog open={proModel.isOpen} onOpenChange={proModel.onClose}>
@@ -93,7 +109,13 @@ const ProModel = () => {
             </DialogDescription>
           </DialogHeader>
           <DialogFooter>
-            <Button className="w-full" variant="premium" size="lg">
+            <Button
+              disabled={loading}
+              className="w-full"
+              variant="premium"
+              size="lg"
+              onClick={onSubscribe}
+            >
               Upgrade
               <Zap className="w-4 h-4 ml-2 fill-white" />
             </Button>

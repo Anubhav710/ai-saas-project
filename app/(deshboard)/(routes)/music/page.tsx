@@ -15,6 +15,7 @@ import { useRouter } from "next/navigation"
 import Empty from "@/components/Empty"
 import Loder from "@/components/Loder"
 import { useProModel } from "@/hooks/use-pre-model"
+import toast from "react-hot-toast"
 
 const MusicPage = () => {
   const router = useRouter()
@@ -39,6 +40,8 @@ const MusicPage = () => {
     } catch (error: any) {
       if (error?.response?.status === 403) {
         proModel.onOpen()
+      } else {
+        toast.error("Something went wrong")
       }
     } finally {
       router.refresh()
