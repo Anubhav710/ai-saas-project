@@ -1,9 +1,8 @@
 Live View - https://ai-saas-xi.vercel.app/
 
-<h1>Landing Page</h1>
 ![Screenshot 2023-07-28 202212](https://github.com/Anubhav710/ai-saas-project/assets/100343499/21d547ea-da9c-4a60-a75e-2bd4fb475d5d)
 
-<h2>Dashboard</h2>
+
 ![Screenshot 2023-07-28 202257](https://github.com/Anubhav710/ai-saas-project/assets/100343499/10b80c8c-160a-4516-88ae-2b41d8fb758d)
 
 ![Screenshot 2023-07-28 202324](https://github.com/Anubhav710/ai-saas-project/assets/100343499/99c37143-511a-4faf-ac4c-9de1f1a37876)
