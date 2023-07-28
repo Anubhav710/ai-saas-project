@@ -7,26 +7,29 @@ const testimonials = [
     name: "Antio",
     avitar: "A",
     title: "Software Engineer",
-    description: "This is the best application I've used",
+    description:
+      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Corporis atque nesciunt maxime laboriosam? Expedita eum quam explicabo, natus quia ipsa.",
   },
   {
     name: "Avi",
     avitar: "A",
     title: "Software Engineer",
-    description: "This is the best application I've used",
+    description:
+      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Corporis atque nesciunt maxime laboriosam? Expedita eum quam explicabo, natus quia ipsa.",
   },
   {
     name: "Alice",
     avitar: "A",
     title: "Software Engineer",
-    description: "This is the best application I've used",
+    description:
+      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Corporis atque nesciunt maxime laboriosam? Expedita eum quam explicabo, natus quia ipsa.",
   },
 ]
 
 export const LandingContent = () => {
   return (
     <div className="px-10 pb-20">
-      <h2>Testimonials</h2>
+      <h2 className="text-4xl text-white font-bold mb-7 pl-4">Testimonials</h2>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
         {testimonials.map((item) => (
           <Card

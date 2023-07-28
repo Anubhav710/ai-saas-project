@@ -25,7 +25,7 @@ export const LandingNavbar = () => {
         <p className="text-white ml-2">{" ( Beta )"}</p>
       </Link>
       <div className="flex items-center gap-x-2">
-        <Link href={isSignedIn ? "/deshboard" : "/sign-up"}>
+        <Link href={isSignedIn ? "/dashboard" : "/sign-up"}>
           <Button variant="outline" className="rounded-full">
             Get Started
           </Button>

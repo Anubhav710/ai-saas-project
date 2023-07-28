@@ -20,9 +20,9 @@ const montserrat = Montserrat({ weight: "600", subsets: ["latin"] })
 
 const routes = [
   {
-    label: "Deshboard",
+    label: "Dashboard",
     icon: LayoutDashboard,
-    href: "/deshboard",
+    href: "/dashboard",
     color: "text-sky-500",
   },
   {
@@ -38,7 +38,7 @@ const routes = [
     color: "text-pink-700",
   },
   {
-    label: "Deshboard",
+    label: "Video Generation",
     icon: VideoIcon,
     href: "/video",
     color: "text-orange-700",

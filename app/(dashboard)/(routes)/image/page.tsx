@@ -36,7 +36,7 @@ const ImagePage = () => {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      prompt: "",
+      prompt: "A picture of a horse in wiss alps",
       amount: "1",
       resolution: "512x512",
     },
@@ -89,7 +89,6 @@ const ImagePage = () => {
                       <Input
                         className="border-0 outline-none focus-visible:ring-0 focus-visible:ring-transparent "
                         disabled={isLoading}
-                        placeholder="A picture of a horse in wiss alps"
                         {...field}
                       />
                     </FormControl>
@@ -175,8 +174,13 @@ const ImagePage = () => {
                   <Image src={images} alt="Image" fill />
                 </div>
                 <CardFooter>
-                  <Button variant="secondary" className="w-full">
+                  <Button
+                    variant="secondary"
+                    className="w-full"
+                    onClick={() => window.open(images)}
+                  >
                     <Download className="h-4 w-4 mr-2" />
+                    Download
                   </Button>
                 </CardFooter>
               </Card>

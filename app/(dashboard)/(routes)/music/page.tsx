@@ -26,7 +26,7 @@ const MusicPage = () => {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      prompt: "",
+      prompt: "Piano solo",
     },
   })
 
@@ -71,7 +71,6 @@ const MusicPage = () => {
                       <Input
                         className="border-0 outline-none focus-visible:ring-0 focus-visible:ring-transparent "
                         disabled={isLoading}
-                        placeholder="Piano solo"
                         {...field}
                       />
                     </FormControl>
@@ -93,7 +92,7 @@ const MusicPage = () => {
               <Loder />
             </div>
           )}
-          {!music && !isLoading && <Empty label="No Music Generated" />}
+          {!music && !isLoading && <Empty label="No Music generated." />}
           {music && (
             <audio controls className="w-full mt-8">
               <source src={music} />
